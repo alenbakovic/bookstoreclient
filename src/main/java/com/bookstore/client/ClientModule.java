@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ClientModule {
 
-    private static final String BOOKSTOR_URL = "http://localhost:8080/bookstore";
+    private static final String BOOKSTORE_URL = "http://localhost:8080/bookstore";
     private static final String GET_BOOK = "/getBook";
     private static final String ADD_BOOK = "/addBook";
     private static final String ISBN_BASE = "0978-3-16-148410-";
@@ -28,7 +28,7 @@ public class ClientModule {
         System.out.println("Uploading books to server and saving in database");
         bookList.forEach(book -> {
             bookstoreClient
-                    .resource(BOOKSTOR_URL + ADD_BOOK)
+                    .resource(BOOKSTORE_URL + ADD_BOOK)
                     .type(MediaType.APPLICATION_JSON_TYPE)
                     .post(book);
         });
@@ -39,7 +39,7 @@ public class ClientModule {
 
         for (int i = 0; i < 5; i++) {
             Book receivedBook = bookstoreClient
-                    .resource(BOOKSTOR_URL + GET_BOOK)
+                    .resource(BOOKSTORE_URL + GET_BOOK)
                     .queryParam("isbn", ISBN_BASE + i)
                     .get(Book.class);
             receivedBooks.add(receivedBook);
